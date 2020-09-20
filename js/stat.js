@@ -92,7 +92,7 @@ window.renderStatistics = function(ctx, players, times) {
       scoreY
     );
     if (players[i] === 'Вы') {
-      ctx.fillStyle = 'red';
+      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
       ctx.fillStyle = getRandomColor();
     }
