@@ -9,12 +9,12 @@ var CLOUD_PADDINGS = 20;
 
 var BAR_HEIGHT_MAX = 150;
 var BAR_WIDTH = 40;
-var BAR_Y_GLOBAL = CLOUD_Y + CLOUD_PADDINGS + (CLOUD_PADDINGS * 2.8);
+var BAR_Y_GLOBAL = CLOUD_Y + CLOUD_PADDINGS + (CLOUD_PADDINGS * 3.5);
 var BAR_GAP = 50;
 
-var NAME_Y = (CLOUD_HEIGHT + CLOUD_Y) - CLOUD_PADDINGS;
+var NAME_Y = (CLOUD_HEIGHT + CLOUD_Y) - (CLOUD_PADDINGS * 0.5);
 
-var SCORE_Y_GLOBAL = BAR_Y_GLOBAL - (CLOUD_PADDINGS * 0.5);
+var SCORE_Y_GLOBAL = BAR_Y_GLOBAL - (CLOUD_PADDINGS * 0.2);
 
 var ITEM_X = CLOUD_X + CLOUD_PADDINGS;
 
@@ -22,6 +22,10 @@ var renderCloud = function (ctx, color, x, y) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTN, CLOUD_HEIGHT);
 }
+
+var GET_RANDOM_VALUE = function (min, max) {
+  return Math.random() * (max - min) + min;
+};
 
 var getMaxElement = function(arr) {
   var maxElement = arr[0];
@@ -63,14 +67,14 @@ window.renderStatistics = function(ctx, players, times) {
   var maxTime = getMaxElement(times);
 
   for (var i = 0; i < players.length; i++) {
-    let ITEM_X_STEP = ITEM_X + (BAR_WIDTH + BAR_GAP) * i;
+    const ITEM_X_STEP = ITEM_X + (BAR_WIDTH + BAR_GAP) * i;
 
-    let barHeight = (BAR_HEIGHT_MAX * times[i]) / maxTime;
-    let barY = BAR_Y_GLOBAL + (BAR_HEIGHT_MAX - barHeight);
-    let scoreY = SCORE_Y_GLOBAL + (BAR_HEIGHT_MAX - barHeight);
+    const barHeight = (BAR_HEIGHT_MAX * times[i]) / maxTime;
+    const barY = BAR_Y_GLOBAL + (BAR_HEIGHT_MAX - barHeight);
+    const scoreY = SCORE_Y_GLOBAL + (BAR_HEIGHT_MAX - barHeight);
 
-    let getRandomColor = function () {
-      return "hsl(" + 233 + ',' + (100 * Math.random()) + '%,' + (100 * Math.random()) + '%)';
+    const getRandomColor = function () {
+      return "hsl(" + 233 + ',' + GET_RANDOM_VALUE(20, 80) + '%,' + GET_RANDOM_VALUE(20, 80) + '%)';
     };
 
     if (players[i] === 'Вы') {
