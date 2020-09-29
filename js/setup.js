@@ -2,7 +2,7 @@
 
 var WIZARD_FIRST_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристофр', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var WIZARD_LAST_NAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
-var COAT_COLOR = ['rgb (101, 137, 164)', 'rgb (241, 43, 107)', 'rgb (146, 100, 161)', 'rgb (56, 159, 117)', 'rgb (215, 210, 55)', 'rgb (0, 0, 0)'];
+var COAT_COLOR = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
 
 var setup = document.querySelector('.setup');
@@ -18,7 +18,7 @@ var GET_RANDOM_I = function (wizardObj) {
   for (var startValue = 0; startValue < wizardObj.length; startValue++) {
     startValue += 1;
   };
-  return Math.round(Math.random() * startValue);
+  return Math.floor(Math.random() * startValue);
 };
 
 var wizardAmount = 4;
