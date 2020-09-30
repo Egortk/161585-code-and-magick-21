@@ -21,16 +21,16 @@ var ITEM_X = CLOUD_X + CLOUD_PADDINGS;
 var renderCloud = function (ctx, color, x, y) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTN, CLOUD_HEIGHT);
-}
-
-var GET_RANDOM_VALUE = function (min, max) {
-  return Math.random() * (max - min) + min;
 };
 
-var getMaxElement = function(arr) {
+var getRandomValue = function (min, max) {
+  return Math.floor(Math.random() * (max.length - min) + min);
+};
+
+var getMaxElement = function (arr) {
   var maxElement = arr[0];
 
-  for (var i = 1; i < arr.length; i++) {
+  for (let i = 1; i < arr.length; i++) {
     if (arr[i] > maxElement) {
       maxElement = arr[i];
     }
@@ -39,72 +39,72 @@ var getMaxElement = function(arr) {
   return maxElement;
 };
 
-window.renderStatistics = function(ctx, players, times) {
+window.renderStatistics = function (ctx, players, times) {
   renderCloud(
-    ctx,
-    'rgba(0, 0, 0, 0.7)',
-    CLOUD_X + GAP,
-    CLOUD_Y + GAP
+      ctx,
+      1,
+      CLOUD_X + GAP,
+      CLOUD_Y + GAP
   );
   renderCloud(
-    ctx,
-    '#fff',
-    CLOUD_X,
-    CLOUD_Y
+      ctx,
+      `#fff`,
+      CLOUD_X,
+      CLOUD_Y
   );
-  ctx.fillStyle = '#000';
+  ctx.fillStyle = `#000`;
   ctx.fillText(
-    'Ура вы победили!',
-    ITEM_X,
-    CLOUD_PADDINGS * 2
+      `Ура вы победили!`,
+      ITEM_X,
+      CLOUD_PADDINGS * 2
   );
   ctx.fillText(
-    'Список результатов:',
-    ITEM_X,
-    CLOUD_PADDINGS * 3
+      `Список результатов:`,
+      ITEM_X,
+      CLOUD_PADDINGS * 3
   );
 
-  var maxTime = getMaxElement(times);
+  let maxTime = getMaxElement(times);
 
-  for (var i = 0; i < players.length; i++) {
-    const ITEM_X_STEP = ITEM_X + (BAR_WIDTH + BAR_GAP) * i;
+  for (let i = 0; i < players.length; i++) {
+    var ITEM_X_STEP = ITEM_X + (BAR_WIDTH + BAR_GAP) * i;
 
-    const barHeight = (BAR_HEIGHT_MAX * times[i]) / maxTime;
-    const barY = BAR_Y_GLOBAL + (BAR_HEIGHT_MAX - barHeight);
-    const scoreY = SCORE_Y_GLOBAL + (BAR_HEIGHT_MAX - barHeight);
+    var barHeight = (BAR_HEIGHT_MAX * times[i]) / maxTime;
+    var barY = BAR_Y_GLOBAL + (BAR_HEIGHT_MAX - barHeight);
+    var scoreY = SCORE_Y_GLOBAL + (BAR_HEIGHT_MAX - barHeight);
 
-    const getRandomColor = function () {
-      return "hsl(" + 233 + ',' + GET_RANDOM_VALUE(20, 80) + '%,' + GET_RANDOM_VALUE(20, 80) + '%)';
+    var getRandomColor = function () {
+      return `hsl(` + 233 + `,` + getRandomValue(20, 80) + `%,` + getRandomValue(20, 80) + `%)`;
     };
 
-    if (players[i] === 'Вы') {
-      ctx.fillStyle = 'red';
+    if (players[i] === `Вы`) {
+      ctx.fillStyle = `red`;
     } else {
       ctx.fillStyle = getRandomColor();
     }
 
-    ctx.fillStyle = '#000';
+    ctx.fillStyle = `#000`;
     ctx.fillText(
-      players[i],
-      ITEM_X_STEP,
-      NAME_Y
+        players[i],
+        ITEM_X_STEP,
+        NAME_Y
     );
-    ctx.fillStyle = '#000';
+    ctx.fillStyle = `#000`;
     ctx.fillText(
-      Math.ceil(times[i]),
-      ITEM_X_STEP,
-      scoreY
+        Math.ceil(times[i]),
+        ITEM_X_STEP,
+        scoreY
     );
-    if (players[i] === 'Вы') {
-      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+    if (players[i] === `Вы`) {
+      ctx.fillStyle = `rgba(255, 0, 0, 1)`;
     } else {
       ctx.fillStyle = getRandomColor();
     }
     ctx.fillRect(
-      ITEM_X_STEP,
-      barY,
-      BAR_WIDTH,
-      barHeight
+        ITEM_X_STEP,
+        barY,
+        BAR_WIDTH,
+        barHeight
     );
   }
 };
